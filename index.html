@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Magyar Turisztikai Dashboard</title>
+
+https://cdn.jsdelivr.net/npm/chart.jsscript>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f5f7fa;
+    margin:0;
+    padding:20px;
+}
+
+h1{
+    color:#003366;
+}
+
+.dashboard{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.kpi{
+    text-align:center;
+}
+
+.kpi-value{
+    font-size:36px;
+    font-weight:bold;
+    color:#005a9c;
+}
+
+.kpi-label{
+    font-size:14px;
+    color:#666;
+}
+
+.chart-container{
+    background:white;
+    padding:20px;
+    margin-bottom:25px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+canvas{
+    max-height:450px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🇭🇺 Magyar Turisztikai Teljesítmény Dashboard</h1>
+
+<div class="dashboard">
+
+<div class="card kpi">
+    <div class="kpi-value">12,4 M</div>
+    <div class="kpi-label">Vendégszám</div>
+</div>
+
+<div class="card kpi">
+    <div class="kpi-value">31,8 M</div>
+    <div class="kpi-label">Vendégéjszaka</div>
+</div>
+
+<div class="card kpi">
+    <div class="kpi-value">+7,2%</div>
+    <div class="kpi-label">Éves növekedés</div>
+</div>
+
+<div class="card kpi">
+    <div class="kpi-value">44%</div>
+    <div class="kpi-label">Külföldi részarány</div>
+</div>
+
+</div>
+
+<div class="chart-container">
+    <h2>Havi trendek</h2>
+    <canvas id="monthlyTrend"></canvas>
+</div>
+
+<div class="chart-container">
+    <h2>TOP 10 járás</h2>
+    <canvas id="districtChart"></canvas>
+</div>
+
+<div class="chart-container">
+    <h2>TOP 10 küldőpiac</h2>
+    <canvas id="marketChart"></canvas>
+</div>
+
+<script>
+
+// Havi trend
+
+new Chart(
+document.getElementById('monthlyTrend'),
+{
+type:'line',
+data:{
+labels:[
+'Jan','Feb','Már','Ápr','Máj','Jún',
+'Júl','Aug','Szep','Okt','Nov','Dec'
+],
+datasets:[{
+label:'Vendégéjszaka (ezer)',
+data:[
+1800,1900,2100,2500,
+2800,3200,3700,4100,
+2900,2400,2000,1850
+],
+borderColor:'#005a9c',
+backgroundColor:'rgba(0,90,156,0.15)',
+fill:true,
+tension:0.3
+}]
+}
+});
+
+// TOP 10 járás
+
+new Chart(
+document.getElementById('districtChart'),
+{
+type:'bar',
+data:{
+labels:[
+'Budapest',
+'Siófoki',
+'Balatonfüredi',
+'Hévízi',
+'Szentendrei',
+'Debreceni',
+'Győri',
+'Pécsi',
+'Szegedi',
+'Tokaji'
+],
+datasets:[{
+label:'Vendégéjszaka (ezer)',
+data:[
+4800,2400,2100,1800,
+1400,1300,1200,1100,
+950,900
+],
+backgroundColor:'#0078D4'
+}]
+},
+options:{
+indexAxis:'y'
+}
+});
+
+// TOP 10 küldőpiac
+
+new Chart(
+document.getElementById('marketChart'),
+{
+type:'bar',
+data:{
+labels:[
+'Németország',
+'Románia',
+'Lengyelország',
+'Csehország',
+'Szlovákia',
+'Egyesült Királyság',
+'Ausztria',
+'Szerbia',
+'Olaszország',
+'USA'
+],
+datasets:[{
+label:'Vendégek (ezer fő)',
+data:[
+1600,1100,980,950,
+870,760,720,610,
+580,540
+],
+backgroundColor:'#00A562'
+}]
+}
+});
+
+</script>
+
+</body>
+</html>
